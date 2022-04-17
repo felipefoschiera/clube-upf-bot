@@ -6,14 +6,12 @@
 
 ## Configuration
 
-### `config.json` file
-This file is necessary to configure the Discord Bot API. Expected format:
-```json
-{
-    "token": "<BOT_TOKEN>",
-    "clientId": "<BOT_CLIENT_ID>",
-    "guildId": "<SERVER_ID>"
-}
+### Environment variables
+Environment variables necessary to configure the Discord Bot API.
+```
+TOKEN="<BOT_TOKEN>"
+CLIENT_ID="<BOT_CLIENT_ID>"
+GUILD_ID="<SERVER_ID>"
 ```
 
 ### `permissions.json`
