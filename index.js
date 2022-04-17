@@ -1,6 +1,7 @@
 const fs = require('node:fs');
 const { Client, Collection, Intents } = require('discord.js');
-const { token } = require('./config.json');
+const { guildId, token } = require('./config.json');
+const { permissions } = require('./permissions.json');
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
@@ -12,8 +13,17 @@ for (const file of commandFiles) {
 	client.commands.set(command.data.name, command);
 }
 
-client.once('ready', () => {
-	console.log('Ready!');
+client.once('ready', async () => {
+	const guild = client.guilds.cache.get(guildId);
+	const commands = await guild.commands.fetch();
+	await commands.forEach(slashCommand => {
+		console.log(`Setting permission for command "${slashCommand.name}" (${slashCommand.id})`);
+		guild.commands.permissions.add({
+			command: slashCommand.id,
+			permissions,
+		});
+	});
+	console.log('Bot is ready!');
 });
 
 client.on('interactionCreate', async interaction => {

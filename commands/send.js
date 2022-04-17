@@ -13,7 +13,8 @@ module.exports = {
 			option.setName('text')
 				.setDescription('The text message content')
 				.setRequired(true),
-		),
+		)
+		.setDefaultPermission(false),
 	async execute(interaction) {
 		const channel = interaction.options.getChannel('channel');
 		const text = interaction.options.getString('text');
