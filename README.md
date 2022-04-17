@@ -16,3 +16,16 @@ GUILD_ID="<SERVER_ID>"
 
 ### Deploy commands
 To deploy new commands, run `node deploy-commands.js`
+
+### Permissions
+Permissions are configured as a JSON array and deployed as the `PERMISSIONS` environment variable as a string. Expected format:
+```json
+[
+    {
+        "id": "<ROLE_ID>",
+        "type": "ROLE",
+        "permission": true
+    }
+]
+```
+You can transform the JSON object to a string with the `JSON.stringify(object)` function and set the variable.
