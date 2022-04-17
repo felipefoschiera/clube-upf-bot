@@ -40,4 +40,30 @@ client.on('interactionCreate', async interaction => {
 	}
 });
 
+client.on('interactionCreate', async interaction => {
+	if (!interaction.isSelectMenu()) return;
+
+	const { customId, values, member } = interaction;
+
+	if (customId === 'auto_roles') {
+		const component = interaction.component;
+
+		const toRemove = component.options.filter(option => {
+			return !values.includes(option.value);
+		});
+
+		for (const id of toRemove) {
+			member.roles.remove(id.value);
+		}
+
+		for (const id of values) {
+			member.roles.add(id);
+		}
+
+		interaction.reply({
+			content: 'Cargos atualizados!',
+			ephemeral: true,
+		});
+	}
+});
 client.login(token);
