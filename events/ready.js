@@ -8,12 +8,12 @@ module.exports = {
 		const guild = client.guilds.cache.get(guildId);
 		const commands = await guild.commands.fetch();
 		await commands.forEach(slashCommand => {
-			console.log(`Setting permission for command "${slashCommand.name}" (${slashCommand.id})`);
+			console.log(`Definindo permissões para o comando "${slashCommand.name}" (${slashCommand.id})`);
 			guild.commands.permissions.add({
 				command: slashCommand.id,
 				permissions,
 			});
 		});
-		console.log('Bot is ready!');
+		console.log('Bot está pronto!');
 	},
 };
