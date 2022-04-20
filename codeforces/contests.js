@@ -15,6 +15,7 @@ const filterContests = async (data) => {
 	return data['result']
 		.filter(contest => contestWithinAWeek(contest))
 		.filter(contest => contestHasNotFinished(contest))
+		.sort((a, b) => parseFloat(a.startTimeSeconds) - parseFloat(b.startTimeSeconds))
 		.map(contest => contestAsMessage(contest));
 };
 
