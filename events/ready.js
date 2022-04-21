@@ -23,8 +23,8 @@ module.exports = {
 
 
 const setCodeforcesCronJob = async (client) => {
-	// Runs every day at 07:00 (UTC)
-	const CRON_PATTERN = '0 0 7 * * *';
+	// Runs every day at 13:00 (UTC) / 10:00 (BRT)
+	const CRON_PATTERN = '0 0 13 * * *';
 
 	const scheduledMessage = new cron.CronJob(CRON_PATTERN, async () => {
 		const guild = client.guilds.cache.get(process.env.GUILD_ID);
