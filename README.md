@@ -16,7 +16,7 @@ CONTESTS_CHANNEL_ID=<CHANNEL_TO_SEND_CODEFORCES_CONTESTS>
 ```
 
 ### Deploy commands
-To deploy new commands, run `node deploy-commands.js`
+To deploy new commands, run `npm run commands`
 
 ### Permissions
 Permissions are configured as a JSON array and deployed as the `PERMISSIONS` environment variable as a string. Expected format:

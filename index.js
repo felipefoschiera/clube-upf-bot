@@ -1,6 +1,5 @@
-const { Client, Intents } = require('discord.js');
-const { handleCommands } = require('./handlers/commands');
-const { handleEvents } = require('./handlers/events');
+import { Client, Intents } from 'discord.js';
+import { handleCommands, handleEvents } from './handlers';
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 

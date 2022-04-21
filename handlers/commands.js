@@ -1,16 +1,12 @@
-const fs = require('node:fs');
-const { Collection } = require('discord.js');
+import * as fs from 'node:fs';
+import { Collection } from 'discord.js';
 
-const handleCommands = (client) => {
+export const handleCommands = (client) => {
 	client.commands = new Collection();
-	const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+	const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js') && !file.startsWith('index'));
 
-	commandFiles.forEach(file => {
-		const command = require(`../commands/${file}`);
+	commandFiles.forEach(async file => {
+		const command = await import(`../commands/${file}`);
 		client.commands.set(command.data.name, command);
 	});
-};
-
-module.exports = {
-	handleCommands,
 };

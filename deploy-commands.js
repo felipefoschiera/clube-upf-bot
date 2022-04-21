@@ -1,18 +1,22 @@
-const fs = require('node:fs');
-const { REST } = require('@discordjs/rest');
-const { Routes } = require('discord-api-types/v9');
+import * as fs from 'node:fs';
+import { REST } from '@discordjs/rest';
+import { Routes } from 'discord-api-types/v9';
 
-const commands = [];
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+const importCommand = async (file) => {
+	const command = await import(`./commands/${file}`);
+	return command.data.toJSON();
+};
 
-for (const file of commandFiles) {
-	const command = require(`./commands/${file}`);
-	commands.push(command.data.toJSON());
-}
+const setCommands = async (commandFiles) => {
+	const commands = await Promise.all(commandFiles.map(importCommand));
+	return commands;
+};
 
 const rest = new REST({ version: '9' }).setToken(process.env.TOKEN);
+const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js') && !file.startsWith('index'));
 
 (async () => {
+	const commands = await setCommands(commandFiles);
 	try {
 		console.log('Started refreshing application (/) commands.');
 

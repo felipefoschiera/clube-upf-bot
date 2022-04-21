@@ -1,4 +1,4 @@
-const fetch = require('node-fetch');
+import fetch from 'node-fetch';
 
 const CODEFORCES_CONTEST_API = 'https://codeforces.com/api/contest.list';
 const SECONDS_IN_A_WEEK = 604800;
@@ -6,7 +6,7 @@ const SECONDS_IN_A_WEEK = 604800;
 const LOCALE = 'pt-br';
 const TIMEZONE = 'America/Sao_Paulo';
 
-const getContestsMessage = async () => {
+export const getContestsMessage = async () => {
 	const response = await fetch(CODEFORCES_CONTEST_API);
 	const data = await response.json();
 	const filtered = await filterContests(data);
@@ -39,8 +39,3 @@ const contestAsMessage = (contest) => {
 const buildContestsString = (contests) => {
 	return '**[Codeforces] Contests até a próxima semana:**\n' + contests.join('\n');
 };
-
-module.exports = {
-	getContestsMessage,
-};
-

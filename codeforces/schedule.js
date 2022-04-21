@@ -1,7 +1,7 @@
-const cron = require('cron');
-const { getContestsMessage } = require('./contests');
+import * as cron from 'cron';
+import { getContestsMessage } from './contests';
 
-const setCodeforcesCronJob = async (client) => {
+export const setCodeforcesCronJob = async (client) => {
 	// Runs every day at 13:00 (UTC) / 10:00 (BRT)
 	const CRON_PATTERN = '0 0 13 * * *';
 
@@ -13,8 +13,4 @@ const setCodeforcesCronJob = async (client) => {
 	});
 
 	scheduledMessage.start();
-};
-
-module.exports = {
-	setCodeforcesCronJob,
 };

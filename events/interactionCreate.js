@@ -1,12 +1,11 @@
-module.exports = {
-	name: 'interactionCreate',
-	async execute(interaction, client) {
-		if (interaction.isCommand()) {
-			handleCommandInteraction(interaction, client);
-		} else if (interaction.isSelectMenu()) {
-			handleSelectMenuInteraction(interaction);
-		}
-	},
+export const name = 'interactionCreate';
+
+export const execute = async (interaction, client) => {
+	if (interaction.isCommand()) {
+		handleCommandInteraction(interaction, client);
+	} else if (interaction.isSelectMenu()) {
+		handleSelectMenuInteraction(interaction);
+	}
 };
 
 const handleCommandInteraction = async (interaction, client) => {
